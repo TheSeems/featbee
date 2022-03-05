@@ -1,0 +1,38 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1646510212809-1
+      author: theseems (generated)
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: feedback_entityPK
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: content
+                  type: VARCHAR(8096)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: ip
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: score
+                  type: INTEGER
+            tableName: feedback_entity
+  - changeSet:
+      id: 1646510212809-2
+      author: theseems (generated)
+      changes:
+        - addUniqueConstraint:
+            columnNames: ip
+            constraintName: UC_FEEDBACK_ENTITYIP_COL
+            tableName: feedback_entity
+

@@ -1,0 +1,25 @@
+spring:
+  profiles:
+    # Specify profiles corresponding to thrut feedback processors
+    active: thrut-telegram,test
+  datasource:
+    url: "jdbc:postgresql://localhost/thrut"
+    username: "postgres"
+    password: "postgres"
+    driver-class-name: org.postgresql.Driver
+  liquibase:
+    change-log: "classpath:changelog.yml"
+
+# Telegram related settings
+# Will be in use only if thrut-telegram is specified in active profiles
+thrut:
+  telegram:
+    token: "_please_fill_in_telegram_token_in_application_properties_"
+    receiver: "_please_fill_in_receiver_in_application_properties_"
+    message: |
+      IP: {ip}
+      
+      Score: {score}
+      
+      Comment:
+      {content}
