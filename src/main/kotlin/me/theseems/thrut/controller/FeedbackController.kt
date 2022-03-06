@@ -18,12 +18,12 @@ class FeedbackController {
     @Autowired
     private lateinit var service: FeedbackService
 
-    @PostMapping
+    @PostMapping("api")
     @ResponseBody
     fun sendFeedback(@RequestBody @Valid feedbackDto: FeedbackDto, request: HttpServletRequest) =
         service.saveFeedback(feedbackDto, HttpUtils.getRequestIp(request))
 
-    @GetMapping
+    @GetMapping("api")
     @ResponseBody
     fun getFeedback(request: HttpServletRequest) =
         service.getFeedback(HttpUtils.getRequestIp(request)) ?: throw EntityNotFoundException("no feedback provided")
