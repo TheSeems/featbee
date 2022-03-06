@@ -58,7 +58,7 @@ class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException::class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    fun handleConstraintFailure(exception: MethodArgumentNotValidException): ResponseEntity<Map<String, Any>> {
+    fun handleConstraintFailure(exception: MethodArgumentNotValidException): ResponseEntity<Map<String, Any?>> {
         return ResponseEntity
             .badRequest()
             .body(
@@ -68,7 +68,7 @@ class GlobalExceptionHandler {
                     "details" to exception.fieldErrors.map {
                         mapOf(
                             "field" to it.field,
-                            "error" to it.defaultMessage
+                            "error" to (it.defaultMessage ?: "unknown")
                         )
                     }
                 )

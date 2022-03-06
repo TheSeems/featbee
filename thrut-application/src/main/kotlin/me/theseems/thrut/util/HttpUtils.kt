@@ -1,6 +1,6 @@
 package me.theseems.thrut.util
 
-import liquibase.repackaged.org.apache.commons.lang3.StringUtils
+import org.apache.commons.lang3.StringUtils
 import java.net.InetAddress
 import java.net.UnknownHostException
 import javax.servlet.http.HttpServletRequest
@@ -22,7 +22,7 @@ class HttpUtils {
 
             if (StringUtils.isEmpty(ipAddress) || "unknown".equals(ipAddress, ignoreCase = true)) {
                 ipAddress = request.remoteAddr
-                if (LOCALHOST_IPV4.equals(ipAddress) || LOCALHOST_IPV6.equals(ipAddress)) {
+                if (LOCALHOST_IPV4 == ipAddress || LOCALHOST_IPV6 == ipAddress) {
                     try {
                         val inetAddress = InetAddress.getLocalHost()
                         ipAddress = inetAddress.hostAddress

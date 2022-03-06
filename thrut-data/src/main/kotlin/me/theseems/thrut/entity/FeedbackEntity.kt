@@ -5,10 +5,6 @@ import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.FetchType
 
-const val CONTENT_MAX_LENGTH = 8096
-const val SCORE_MIN_VALUE = 0
-const val SCORE_MAX_VALUE = 10
-
 @Entity
 class FeedbackEntity(
     @Basic(fetch = FetchType.LAZY)
@@ -20,4 +16,10 @@ class FeedbackEntity(
 
     @Column(nullable = false, unique = true)
     var ip: String
-) : BaseEntity<Long>()
+) : BaseEntity<Long>() {
+    companion object {
+        const val CONTENT_MAX_LENGTH = 8096
+        const val SCORE_MIN_VALUE = 0
+        const val SCORE_MAX_VALUE = 10
+    }
+}

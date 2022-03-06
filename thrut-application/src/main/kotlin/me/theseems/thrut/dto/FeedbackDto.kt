@@ -1,8 +1,8 @@
 package me.theseems.thrut.dto
 
-import me.theseems.thrut.entity.CONTENT_MAX_LENGTH
-import me.theseems.thrut.entity.SCORE_MAX_VALUE
-import me.theseems.thrut.entity.SCORE_MIN_VALUE
+import me.theseems.thrut.entity.FeedbackEntity.Companion.CONTENT_MAX_LENGTH
+import me.theseems.thrut.entity.FeedbackEntity.Companion.SCORE_MAX_VALUE
+import me.theseems.thrut.entity.FeedbackEntity.Companion.SCORE_MIN_VALUE
 import javax.validation.constraints.Max
 import javax.validation.constraints.Min
 import javax.validation.constraints.Size

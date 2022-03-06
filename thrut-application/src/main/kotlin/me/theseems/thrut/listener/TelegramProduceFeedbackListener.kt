@@ -2,8 +2,8 @@ package me.theseems.thrut.listener
 
 import com.github.kotlintelegrambot.Bot
 import com.github.kotlintelegrambot.entities.ChatId
-import liquibase.repackaged.org.apache.commons.text.StringSubstitutor
 import me.theseems.thrut.event.FeedbackProduceEvent
+import org.apache.commons.text.StringSubstitutor
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.context.ApplicationListener
