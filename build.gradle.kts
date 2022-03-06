@@ -19,5 +19,5 @@ version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_17
 
 application {
-    mainClass.set("me.theseems.thrut.ThrutApplicationKt")
+    mainClass.set("me.theseems.featbee.FeatbeeApplicationKt")
 }

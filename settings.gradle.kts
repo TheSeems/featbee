@@ -1,4 +1,3 @@
-rootProject.name = "thrut"
-include("thrut-statistics")
-include("thrut-data")
-include("thrut-application")
+rootProject.name = "featbee"
+include("featbee-data")
+include("featbee-application")
