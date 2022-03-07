@@ -11,4 +11,6 @@ interface FeedbackMapper {
     fun map(feedbackDto: FeedbackDto): FeedbackEntity
 
     fun map(feedbackEntity: FeedbackEntity): FeedbackDto
+
+    fun mapIdentity(feedbackEntity: FeedbackEntity?): FeedbackEntity?
 }

@@ -3,7 +3,7 @@ package me.theseems.featbee.service
 import me.theseems.featbee.dao.FeedbackDao
 import me.theseems.featbee.dto.FeedbackDto
 import me.theseems.featbee.event.FeedbackChangedEvent
-import me.theseems.featbee.event.FeedbackProduceEvent
+import me.theseems.featbee.event.FeedbackProducedEvent
 import me.theseems.featbee.mapper.FeedbackMapper
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.ApplicationEventPublisher
@@ -31,11 +31,14 @@ class FeedbackService {
     fun saveFeedback(feedbackDto: FeedbackDto, userIp: String): FeedbackDto {
         val entityManager = entityManagerFactory.createEntityManager()
         try {
+            var current = feedbackDao.findByIp(userIp)
+            if (current != null && feedbackDto == feedbackMapper.map(current)) {
+                return feedbackDto
+            }
+
+            val previous = feedbackMapper.mapIdentity(current)
             val transaction = entityManager.transaction
             transaction.begin()
-
-            var current = feedbackDao.findByIp(userIp)
-            val previous = current
 
             if (current != null) {
                 current.content = feedbackDto.content
@@ -49,9 +52,14 @@ class FeedbackService {
             try {
                 entityManager.merge(current)
                 if (previous == null) {
-                    applicationEventPublisher.publishEvent(FeedbackProduceEvent(current))
+                    applicationEventPublisher.publishEvent(FeedbackProducedEvent(current))
                 } else {
-                    applicationEventPublisher.publishEvent(FeedbackChangedEvent(current, previous))
+                    applicationEventPublisher.publishEvent(
+                        FeedbackChangedEvent(
+                            feedbackEntity = current,
+                            previousFeedbackEntity = previous
+                        )
+                    )
                 }
 
                 transaction.commit()

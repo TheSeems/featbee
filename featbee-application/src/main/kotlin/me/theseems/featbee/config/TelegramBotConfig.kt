@@ -17,8 +17,11 @@ class TelegramBotConfig {
     @Value("\${featbee.telegram.receiver}")
     private lateinit var chatId: String
 
-    @Value("\${featbee.telegram.message}")
-    private lateinit var message: String
+    @Value("\${featbee.telegram.producedMessage}")
+    private lateinit var producedMessage: String
+
+    @Value("\${featbee.telegram.changedMessage}")
+    private lateinit var changedMessage: String
 
     @Bean
     fun telegramBot() = bot { token = telegramBotToken }
@@ -28,6 +31,10 @@ class TelegramBotConfig {
     fun receiverChatId() = ChatId.fromId(chatId.toLong())
 
     @Bean
-    @Qualifier("featbee-telegram-message")
-    fun message(): String = message
+    @Qualifier("featbee-telegram-produced-message")
+    fun producedMessage(): String = producedMessage
+
+    @Bean
+    @Qualifier("featbee-telegram-changed-message")
+    fun changedMessage(): String = changedMessage
 }

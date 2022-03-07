@@ -1,7 +1,7 @@
 spring:
   profiles:
-    # Specify profiles corresponding to featbee feedback processors
-    active: featbee-telegram,test
+    # Specify profiles corresponding to featbee features
+    active: featbee-telegram
   datasource:
     url: "jdbc:postgresql://localhost/featbee"
     username: "postgres"
@@ -13,10 +13,25 @@ spring:
 # Telegram related settings
 # Will be in use only if featbee-telegram is specified in active profiles
 featbee:
+  # Allowed domains (CORS), remove or set to * to allow any
+  domains: "*"
   telegram:
     token: "_please_fill_in_telegram_token_in_application_properties_"
     receiver: "_please_fill_in_receiver_in_application_properties_"
-    message: |
+
+    changedMessage: |
+      IP: {ip}
+      
+      Score:
+      {oldScore} -> {newScore}
+      
+      Old comment:
+      {oldContent}
+      
+      New comment:
+      {newContent}
+
+    producedMessage: |
       IP: {ip}
       
       Score: {score}
