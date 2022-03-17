@@ -1,6 +1,7 @@
 package me.theseems.featbee.controller
 
 import me.theseems.featbee.dto.FeedbackDto
+import me.theseems.featbee.handler.captcha.CaptchaRequired
 import me.theseems.featbee.service.FeedbackService
 import me.theseems.featbee.util.HttpUtils
 import org.springframework.beans.factory.annotation.Autowired
@@ -18,6 +19,7 @@ class FeedbackController {
     @Autowired
     private lateinit var service: FeedbackService
 
+    @CaptchaRequired
     @PostMapping("api")
     @ResponseBody
     fun sendFeedback(@RequestBody @Valid feedbackDto: FeedbackDto, request: HttpServletRequest) =

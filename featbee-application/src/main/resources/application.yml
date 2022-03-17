@@ -1,7 +1,8 @@
 spring:
   profiles:
     # Specify profiles corresponding to featbee features
-    active: featbee-telegram
+    # active: featbee-telegram,featbee-captcha
+    active: default
   datasource:
     url: "jdbc:postgresql://localhost/featbee"
     username: "postgres"
@@ -15,6 +16,9 @@ spring:
 featbee:
   # Allowed domains (CORS), remove or set to * to allow any
   domains: "*"
+  captcha:
+    secret: "_please_fill_in_recaptcha_secret_in_application_properties_"
+    sitekey: "_please_fill_in_recaptcha_sitekey_in_application_properties_"
   telegram:
     token: "_please_fill_in_telegram_token_in_application_properties_"
     receiver: "_please_fill_in_receiver_in_application_properties_"

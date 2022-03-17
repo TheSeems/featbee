@@ -41,6 +41,9 @@ dependencies {
     implementation("org.mapstruct:mapstruct:1.5.0.Beta2")
     kapt("org.mapstruct:mapstruct-processor:1.5.0.Beta2")
 
+    // Easy requests to Third-Party
+    implementation("com.squareup.okhttp3:okhttp:4.9.3")
+
     developmentOnly("org.springframework.boot:spring-boot-devtools")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
