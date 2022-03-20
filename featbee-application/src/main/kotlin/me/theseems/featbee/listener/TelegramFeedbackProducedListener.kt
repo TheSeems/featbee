@@ -28,12 +28,13 @@ class TelegramFeedbackProducedListener : ApplicationListener<FeedbackProducedEve
         MessageUtils.substituteAndSend(
             substitutionMap = mapOf(
                 "score" to event.feedbackEntity.score,
+                "visibility" to event.feedbackEntity.visibility,
                 "ip" to event.feedbackEntity.ip,
                 "content" to (event.feedbackEntity.content ?: "NO COMMENT")
             ),
             telegramBot = telegramBot,
             chatId = chatId,
-            message = message
+            message = message,
         )
     }
 }

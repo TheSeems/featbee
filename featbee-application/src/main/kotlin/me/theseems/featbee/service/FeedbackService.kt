@@ -2,11 +2,13 @@ package me.theseems.featbee.service
 
 import me.theseems.featbee.dao.FeedbackDao
 import me.theseems.featbee.dto.FeedbackDto
+import me.theseems.featbee.entity.FeedbackEntityVisibility
 import me.theseems.featbee.event.FeedbackChangedEvent
 import me.theseems.featbee.event.FeedbackProducedEvent
 import me.theseems.featbee.mapper.FeedbackMapper
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.ApplicationEventPublisher
+import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import javax.persistence.EntityManagerFactory
@@ -28,6 +30,12 @@ class FeedbackService {
     @Transactional(readOnly = true)
     fun getFeedback(ip: String): FeedbackDto? = feedbackDao.findByIp(ip)?.let(feedbackMapper::map)
 
+    @Transactional(readOnly = true)
+    fun getPublicFeedbackEntities(pageable: Pageable): List<FeedbackDto> = feedbackDao
+        .findByVisibility(pageable, FeedbackEntityVisibility.PUBLIC)
+        .map(feedbackMapper::map)
+        .content
+
     fun saveFeedback(feedbackDto: FeedbackDto, userIp: String): FeedbackDto {
         val entityManager = entityManagerFactory.createEntityManager()
         try {
@@ -41,8 +49,7 @@ class FeedbackService {
             transaction.begin()
 
             if (current != null) {
-                current.content = feedbackDto.content
-                current.score = feedbackDto.score
+                feedbackMapper.update(current, feedbackDto)
             } else {
                 current = feedbackMapper
                     .map(feedbackDto)

@@ -24,21 +24,27 @@ featbee:
     receiver: "_please_fill_in_receiver_in_application_properties_"
 
     changedMessage: |
-      IP: {ip}
+      IP: _{ip}_
+      
+      Visibility:
+      _{oldVisibility}_ -> _{newVisibility}_
       
       Score:
-      {oldScore} -> {newScore}
+      _{oldScore}_ -> **{newScore}**
       
       Old comment:
-      {oldContent}
+      `{oldContent}`
       
       New comment:
-      {newContent}
+      `{newContent}`
+      ­
 
     producedMessage: |
       IP: {ip}
       
-      Score: {score}
+      Visibility: {visibility}
+      Score: **{score}**
       
       Comment:
-      {content}
+      ```{content}```
+      ­

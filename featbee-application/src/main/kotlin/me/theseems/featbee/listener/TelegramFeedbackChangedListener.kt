@@ -30,6 +30,8 @@ class TelegramFeedbackChangedListener : ApplicationListener<FeedbackChangedEvent
                 "ip" to event.feedbackEntity.ip,
                 "newScore" to event.feedbackEntity.score,
                 "oldScore" to event.previousFeedbackEntity.score,
+                "newVisibility" to event.feedbackEntity.visibility,
+                "oldVisibility" to event.previousFeedbackEntity.visibility,
                 "newContent" to (event.feedbackEntity.content ?: "NO COMMENT"),
                 "oldContent" to (event.previousFeedbackEntity.content ?: "NO COMMENT")
             ),

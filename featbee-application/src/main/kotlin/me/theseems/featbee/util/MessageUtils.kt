@@ -2,6 +2,7 @@ package me.theseems.featbee.util
 
 import com.github.kotlintelegrambot.Bot
 import com.github.kotlintelegrambot.entities.ChatId
+import com.github.kotlintelegrambot.entities.ParseMode
 import org.apache.commons.text.StringSubstitutor
 
 class MessageUtils {
@@ -11,7 +12,11 @@ class MessageUtils {
             substitution.setVariablePrefix("{")
             substitution.setVariableSuffix("}")
 
-            val (response, exception) = telegramBot.sendMessage(chatId, substitution.replace(message))
+            val (response, exception) = telegramBot.sendMessage(
+                chatId = chatId,
+                text = substitution.replace(message),
+                parseMode = ParseMode.MARKDOWN
+            )
             if (exception != null) {
                 throw RuntimeException(exception)
             }
